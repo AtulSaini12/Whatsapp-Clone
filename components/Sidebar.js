@@ -3,22 +3,15 @@ import { Avatar, Button, IconButton } from "@material-ui/core";
 import { Chat, MoreVert, Search } from "@material-ui/icons";
 import * as emailValidator from "email-validator";
 import { auth, db } from "../firebase";
-
+import "firebase/compat/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 
 function Sidebar() {
   const [user] = useAuthState(auth);
-  //   const userChatRef = firebase
-  //     .firestore()
-  //     .collection("chats")
-  //     .where("users", "array-contains", user.email);
-  const userChatRef = query(
-    collection(db, "chats"),
-    where("users", "array-contains", user.email)
-  );
-  const chatsSnapshot = getDocs(userChatRef);
+  const userChatRef = db
+    .collection("chats")
+    .where("users", "array-contains", user.email);
 
   const [chatsSnapshot] = useCollection(userChatRef);
 
@@ -35,12 +28,7 @@ function Sidebar() {
       !chatAlreadyExists(input) &&
       input !== user.email
     ) {
-      //
-      //   db.collection("chats").add({
-      //     users: [user.email, input],
-      //   });
-      const collecRef = collection(db, "chats");
-      addDoc(collecRef, {
+      db.collection("chats").add({
         users: [user.email, input],
       });
     }

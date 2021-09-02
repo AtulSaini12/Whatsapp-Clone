@@ -1,4 +1,3 @@
-import { Grid } from "@material-ui/core";
 import { Circle } from "better-react-spinkit";
 
 function Loading() {
