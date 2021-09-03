@@ -83,7 +83,11 @@ function ChatScreen({ chat, messages }) {
   return (
     <Container>
       <Header>
-        {recipient ? <Avatar src={recipient?.photoURL} /> : <Avatar />}
+        {recipient ? (
+          <Avatar src={recipient?.photoURL} />
+        ) : (
+          <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhVd3GPCoVmX_0yhy2X3oQ7WZ5nr1ceMsTHC_X_lvNk6cdE7VOg0COgmV2gwUwAt9g8FQ&usqp=CAU" />
+        )}
 
         <HeaderInfo>
           <h3>{`${recipientEmail}`.substr(0, 10) + "..."}</h3>
@@ -120,7 +124,11 @@ function ChatScreen({ chat, messages }) {
 
       <InputContainer>
         <InsertEmoticon />
-        <Input value={input} onChange={(e) => setInput(e.target.value)} />
+        <Input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="enter your message..."
+        />
         <button hidden disabled={!input} type="submit" onClick={sendMessage}>
           Send Message
         </button>
@@ -144,6 +152,7 @@ const Header = styled.div`
   height: 80px;
   align-items: center;
   border-bottom: 1px solid whitesmoke;
+  background-color: #1dd579;
 `;
 
 const HeaderInfo = styled.div`
@@ -163,6 +172,9 @@ const HeaderIcons = styled.div``;
 
 const MessageContainer = styled.div`
   padding: 30px;
+  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  background-repeat: repeat;
+  background-position: center;
   background-color: #e5ded8;
   min-height: 90vh;
 `;
@@ -177,7 +189,7 @@ const InputContainer = styled.form`
   padding: 10px;
   position: sticky;
   bottom: 0;
-  background-color: white;
+  background-color: #1dd579;
   z-index: 100;
 `;
 

@@ -48,7 +48,12 @@ function Sidebar() {
   return (
     <Container>
       <Header>
-        <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
+        {user.photoURL ? (
+          <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
+        ) : (
+          <UserAvatar src={user.email[0]} onClick={() => auth.signOut()} />
+        )}
+
         <IconsContainer>
           <IconButton>
             <ChatIcon />
@@ -61,7 +66,7 @@ function Sidebar() {
 
       <SearchContainer>
         <Search />
-        <SearchInput />
+        <SearchInput placeholder="search" />
       </SearchContainer>
 
       <SidebarButton onClick={createChat}>Start a new chat</SidebarButton>
@@ -101,7 +106,8 @@ const Header = styled.div`
   align-items: center;
   padding: 15px;
   height: 80px;
-  border-bottom: 1px solid whitesmoke;
+  border-bottom: 1px solid green;
+  background-color: #1dd579;
 `;
 
 const UserAvatar = styled(Avatar)`
@@ -119,19 +125,26 @@ const SearchContainer = styled.div`
   align-items: center;
   padding: 20px;
   border-radius: 2px;
+  background-color: whitesmoke;
 `;
 
 const SearchInput = styled.input`
   outline-width: 0;
   border: none;
   flex: 1;
+  background-color: whitesmoke;
 `;
 
 const SidebarButton = styled(Button)`
   width: 100%;
-
+  background-color: #def2ea !important;
+  transition: all 400ms;
   &&& {
     border-top: 1px solid whitesmoke;
     border-bottom: 1px solid whitesmoke;
+  }
+
+  :hover {
+    background-color: #a8e1c9 !important;
   }
 `;
