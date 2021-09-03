@@ -115,10 +115,7 @@ function ChatScreen({ chat, messages }) {
       </Header>
 
       <MessageContainer>
-        {/* show messages here */}
         {showMessages()}
-        {/* TODO */}
-
         <EndOfMessage ref={endOfMessageRef} />
       </MessageContainer>
 
